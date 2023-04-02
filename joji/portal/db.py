@@ -1,7 +1,6 @@
 import sqlite3
 import streamlit as st
 import pandas as pd
-import os
 
 
 def create_connection(db_file):
@@ -63,3 +62,22 @@ def add_project(project_name, user_id, conn) -> int:
     conn.commit()
 
     return get_project_id(project_name, conn)
+
+
+def get_project_embedding(project_id, conn):
+    c = conn.cursor()
+    c.execute(
+        """
+        SELECT p.project_id, p.name, e.text_embedding
+        FROM project as p
+        INNER JOIN embedding as e
+        ON p.project_id = e.project_id
+        WHERE p.project_id=?
+        """,
+        (project_id,),
+    )
+    row = c.fetchone()
+    if row:
+        return row
+    else:
+        return None
