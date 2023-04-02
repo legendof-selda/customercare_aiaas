@@ -1,0 +1,10 @@
+# Auto detect text files and perform LF normalization
+* text=auto eol=lf
+*.ipynb filter=ipynb_drop_id eol=lf
+*.py diff=python
+*.md diff=markdown
+*.lock eol=lf
+*.yaml eol=lf
+*.gitignore eol=lf
+*.gitkeep eol=lf
+*.gitattributes eol=lf
