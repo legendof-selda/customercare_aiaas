@@ -1,0 +1,222 @@
+[build-system]
+requires = ["poetry-core", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
+
+[project]
+name = "joji"
+readme = "README.md"
+dynamic = ["version", "description"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+]
+
+[project.urls]
+Home = "https://sample.com"
+
+[tool.black]
+line-length = 120
+target-version = ['py310']
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.0.1"
+version_files = ["joji/__init__.py", "pyproject.toml:version"]
+style = [
+  [
+    "qmark",
+    "fg:#ff9d00 bold",
+  ],
+  [
+    "question",
+    "bold",
+  ],
+  [
+    "answer",
+    "fg:#ff9d00 bold",
+  ],
+  [
+    "pointer",
+    "fg:#ff9d00 bold",
+  ],
+  [
+    "highlighted",
+    "fg:#ff9d00 bold",
+  ],
+  [
+    "selected",
+    "fg:#cc5454",
+  ],
+  [
+    "separator",
+    "fg:#cc5454",
+  ],
+  [
+    "instruction",
+    "",
+  ],
+  [
+    "text",
+    "",
+  ],
+  [
+    "disabled",
+    "fg:#858585 italic",
+  ],
+]
+tag_format = "v$version"
+changelog_incremental = true
+changelog_start_rev = "v0.0.1"
+
+[tool.flake8]
+ignore = [
+  "E203",  # whitespace before ':'
+  "E266",  # Too many leading '#' for block comments
+  "PL123", # Use Path.open instead of open
+  "U101",  # Unused argument that starts with underscore
+  "W503",  # Newline before binary operator
+]
+max-line-length = 120
+max-complexity = 18
+inline-quotes = "double"
+known-modules = ":[joji]"
+application-names = "joji"
+max-expression-complexity = 10
+
+[tool.isort]
+profile = "black"
+
+[tool.poetry]
+name = "joji"
+version = "0.0.1"
+description = ""
+authors = ["MarTech <mmm-dev-team@ab-inbev.com>"]
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+metadata = false
+dirty = false
+strict = true
+style = "semver"
+bump = true
+latest-tag = true
+format = "v{base}.{distance}-{stage}"
+format-jinja = """
+{%- if distance == 0 -%}
+  {%- if branch == "develop" -%}
+    {{ serialize_semver(base, pre=["beta"]) }}
+  {%- elif branch == "staging" -%}
+    {{ serialize_semver(base, pre=["alpha"]) }}
+  {%- elif branch == "master" -%}
+    {{ serialize_semver(base) }}
+  {%- else -%}
+    {{ serialize_semver(base, metadata=[branch_escaped]) }}
+  {%- endif -%}
+{%- else -%}
+  {%- if branch == "develop" -%}
+    {{ serialize_semver(bump_version(base), pre=["beta"]) }}
+  {%- elif branch == "staging" -%}
+    {{ serialize_semver(bump_version(base), pre=["alpha"]) }}
+  {%- elif branch == "master" -%}
+    {{ serialize_semver(bump_version(base)) }}
+  {%- else -%}
+    {{ serialize_semver(bump_version(base), metadata=[branch_escaped]) }}
+  {%- endif -%}
+{%- endif -%}
+"""
+
+[tool.poetry.dependencies]
+python = "3.10.x"
+joblib = "^1.1.0"
+jupyter = "^1.0.0"
+jupyter-dash = "^0.4.2"
+jupyterlab = "^3.6.1"
+keras = "^2.11.0"
+loguru = "^0.6.0"
+matplotlib = "^3.5.3"
+notebook = "^6.4.12"
+numpy = "^1.23"
+openpyxl = "^3.1.1"
+pandas = "^1.3.0"
+plotly = "^5.12.0"
+python-dotenv = "^0.20.0"
+PyYAML = "^6.0"
+scipy = "^1.9.0"
+statsmodels = "^0.13.5"
+tqdm = "^4.64.1"
+typing-extensions = "^4.4.0"
+XlsxWriter = "^3.0.3"
+streamlit = "^1.20.0"
+streamlit-webrtc = "^0.45.0"
+streamlit-chat = "^0.0.2.2"
+openai = "^0.27.2"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+flake8 = "^6.0.0"
+flake8-absolute-import = "^1.0.0.1"
+flake8-builtins = "^2.1.0"
+flake8-expression-complexity = "^0.0.11"
+flake8-pyproject = "^1.2.2"
+flake8-quotes = "^3.3.2"
+flake8-requirements = "^1.7.6"
+flake8-unused-arguments = "^0.0.12"
+flake8-use-fstring = "^1.4"
+flake8-use-pathlib = "^0.3.0"
+ipywidgets = "^8.0.1"
+isort = "^5.12.0"
+jupyter-contrib-nbextensions = "^0.7.0"
+kaleido = "v0.2.1"
+pandas-stubs = "^1.4.3"
+pytest = "^7.1.2"
+pytest-html = "^3.1.1"
+pytest-xdist = "^2.5.0"
+tqdm-stubs = "^0.2.1"
+
+[tool.poetry.group.git]
+optional = true
+
+[tool.poetry.group.git.dependencies]
+pre-commit = "^3.0.4"
+commitizen = "^2.40.0"
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.4.2"
+mkdocs-autorefs = "^0.4.1"
+mkdocs-gen-files = "^0.4.0"
+mkdocs-git-authors-plugin = "^0.7.0"
+mkdocs-git-revision-date-localized-plugin = "^1.1.0"
+mkdocs-literate-nav = "^0.6.0"
+mkdocs-material = "^9.0.15"
+mkdocs-section-index = "^0.3.5"
+mkdocstrings = { extras = ["python"], version = "^0.20.0" }
+python-markdown-math = "^0.8"
+
+[tool.pyright]
+venvPath = "./"
+venv = ".venv"
+exclude = ["**/__pycache__"]
+include = ["joji"]
+reportMissingImports = true
+reportMissingTypeStubs = true
+pythonVersion = "3.10"
+typeCheckingMode = "basic"
+useLibraryCodeForTypes = true
+
+[tool.pytest.ini_options]
+markers = []
+filterwarnings = [
+  "ignore:Call to deprecated create function FieldDescriptor",
+  "ignore:Call to deprecated create function Descriptor",
+  "ignore:Call to deprecated create function EnumDescriptor",
+  "ignore:Call to deprecated create function EnumValueDescriptor",
+  "ignore:Call to deprecated create function FileDescriptor",
+  "ignore:Call to deprecated create function OneofDescriptor",
+]
