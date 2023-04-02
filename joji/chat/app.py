@@ -21,7 +21,7 @@ def generate_response(prompt):
 
 
 # Creating the chatbot interface
-st.title("Customer Care")
+st.title("JOJI")
 
 # Storing the chat
 if "chat" not in st.session_state:
