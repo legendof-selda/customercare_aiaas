@@ -42,3 +42,27 @@ JOJI can speak to you and solve your issues either through voice/video/chat anyt
 6. Standard chatbased resolution
 7. Understand images for troubleshooting
 8. Can be done over the phone as well
+
+## How to Use
+
+### Poetry
+
+1. Install and create python virtual env
+2. Install [poetry](https://python-poetry.org/)
+3. Run `poetry install --with dev` to install requirements
+
+### Run Portal
+
+To run the portal simply run
+
+``` bash
+streamlit run joji/portal/hello.py
+```
+
+### Talk to JOJI
+
+To chat with JOJI
+
+``` basah
+streamlit run joji/chat/app.py
+```
